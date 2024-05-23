@@ -7,7 +7,7 @@ type ConsoleCreateReq struct {
 }
 
 type ConsoleCreateRes struct {
-	ID     int    `msgpack:"id"`
+	ID     string `msgpack:"id"`
 	Prompt string `msgpack:"prompt"`
 	Busy   bool   `msgpack:"busy"`
 }

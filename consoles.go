@@ -2,7 +2,7 @@ package msfrpc
 
 import "github.com/n3x7c04p/msfrpc/models"
 
-//consoles
+// consoles
 func (msf *Msfrpc) ConsoleCreate() (models.ConsoleCreateRes, error) {
 	req := &models.ConsoleCreateReq{Method: models.ConsoleCreate, Token: msf.token}
 	var res models.ConsoleCreateRes
@@ -21,9 +21,9 @@ func (msf *Msfrpc) ConsoleDestroy(ConsoleID string) (bool, error) {
 	return res.Result == "success", nil
 }
 
-func (msf *Msfrpc) ConsoleList() (map[int]models.ConsoleCreateRes, error) {
+func (msf *Msfrpc) ConsoleList() (map[string]models.ConsoleCreateRes, error) {
 	req := &models.ConsoleListReq{Method: models.ConsoleList, Token: msf.token}
-	res := make(map[int]models.ConsoleCreateRes)
+	res := make(map[string]models.ConsoleCreateRes)
 	if err := msf.send(req, &res); err != nil {
 		return nil, err
 	}
