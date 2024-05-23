@@ -2,7 +2,7 @@ package msfrpc
 
 import "github.com/n3x7c04p/msfrpc/models"
 
-//sessions
+// sessions
 func (msf *Msfrpc) SessionList() (map[int]models.SessionListRes, error) {
 	req := &models.SessionListReq{Method: models.SessionList, Token: msf.token}
 	res := make(map[int]models.SessionListRes)
@@ -62,6 +62,26 @@ func (msf *Msfrpc) SessionShellUpgrade(SessionID string, ConnHost string, ConnPo
 	return res.Result == "success", nil
 }
 
+func (msf *Msfrpc) SessionInteractiveRead(SessionID string) (string, error) {
+	req := &models.SessionInteractiveReadReq{Method: models.SessionInteractiveRead, Token: msf.token, SessionID: SessionID}
+	var res models.SessionInteractiveReadRes
+	if err := msf.send(req, &res); err != nil {
+		return "", err
+	}
+	return res.Data, nil
+}
+
+func (msf *Msfrpc) SessionInteractiveWrite(SessionID string, Data string) (bool, error) {
+	req := &models.SessionInteractiveWriteReq{Method: models.SessionInteractiveWrite, Token: msf.token, SessionID: SessionID, Data: Data}
+	var res models.SessionInteractiveWriteRes
+	if err := msf.send(req, &res); err != nil {
+		return false, err
+	}
+	return res.Result == "success", nil
+}
+
+// SessionMeterpreterRead
+// Deprecated. in favour of SessionInteractiveRead
 func (msf *Msfrpc) SessionMeterpreterRead(SessionID string) (string, error) {
 	req := &models.SessionMeterpreterReadReq{Method: models.SessionMeterpreterRead, Token: msf.token, SessionID: SessionID}
 	var res models.SessionMeterpreterReadRes
@@ -71,6 +91,8 @@ func (msf *Msfrpc) SessionMeterpreterRead(SessionID string) (string, error) {
 	return res.Data, nil
 }
 
+// SessionMeterpreterWrite
+// Deprecated. in favour of SessionInteractiveWrite
 func (msf *Msfrpc) SessionMeterpreterWrite(SessionID string, Data string) (bool, error) {
 	req := &models.SessionMeterpreterWriteReq{Method: models.SessionMeterpreterWrite, Token: msf.token, SessionID: SessionID, Data: Data}
 	var res models.SessionMeterpreterWriteRes

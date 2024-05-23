@@ -82,6 +82,29 @@ type SessionShellUpgradeRes struct {
 	Result string `msgpack:"result"`
 }
 
+type SessionInteractiveReadReq struct {
+	_msgpack  struct{} `msgpack:",asArray"`
+	Method    string
+	Token     string
+	SessionID string
+}
+
+type SessionInteractiveReadRes struct {
+	Data string `msgpack:"data"`
+}
+
+type SessionInteractiveWriteReq struct {
+	_msgpack  struct{} `msgpack:",asArray"`
+	Method    string
+	Token     string
+	SessionID string
+	Data      string
+}
+
+type SessionInteractiveWriteRes struct {
+	Result string `msgpack:"result"`
+}
+
 type SessionMeterpreterReadReq struct {
 	_msgpack  struct{} `msgpack:",asArray"`
 	Method    string

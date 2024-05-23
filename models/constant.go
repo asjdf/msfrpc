@@ -95,6 +95,8 @@ const (
 	SessionRingPut                       = "session.ring_put"
 	SessionRingLast                      = "session.ring_last"
 	SessionRingClear                     = "session.ring_clear"
+	SessionInteractiveRead               = "session.interactive_read"
+	SessionInteractiveWrite              = "session.interactive_write"
 	SessionMeterpreterWrite              = "session.meterpreter_write"
 	SessionMeterpreterSessionDetach      = "session.meterpreter_session_detach"
 	SessionMeterpreterSessionKill        = "session.meterpreter_session_kill"
